@@ -55,7 +55,6 @@ $this->title = 'www.dob29.ru - Объявления';
 
 
 				<?php
-				//
 				/** @var $ads frontend\models\Adverts */
 				foreach( $ads as $key => $v ){ ?>
 					<div class="row f-adv">
@@ -78,11 +77,6 @@ $this->title = 'www.dob29.ru - Объявления';
 						</div>
 					</div>
 				<?php } ?>
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-					dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-					ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-					fugiat nulla pariatur.</p>
 
 				<p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
 			</div>
