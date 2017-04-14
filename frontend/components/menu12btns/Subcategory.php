@@ -8,7 +8,22 @@
 namespace frontend\components\menu12btns;
 
 
-class Subcategory
+use yii\db\ActiveRecord;
+
+class Subcategory extends ActiveRecord
 {
+    /**
+     * @return string название таблицы, сопоставленной с этим ActiveRecord-классом.
+     */
+    public static function tableName()
+    {
+        return '{{subcategory}}';
+    }
+
+
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['cat_id' => 'parent_id']);
+    }
 
 }

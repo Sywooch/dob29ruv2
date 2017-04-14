@@ -8,7 +8,12 @@
 namespace frontend\controllers;
 
 
-class AdvertsController
-{
+use frontend\models\Adverts;
+use yii\web\Controller;
 
+class AdvertsController extends Controller
+{
+    public function actionIndex(){
+//        return $this->render('adverts', ['ads' => Adverts::getAds()]);
+    }
 }

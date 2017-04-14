@@ -13,11 +13,7 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
-            'baseUrl'=>'',
             'csrfParam' => '_csrf-frontend',
-        ],
-        'urlManager'=>[
-            'scriptUrl'=>'/index.php',
         ],
         'user' => [
             'identityClass' => 'common\models\User',

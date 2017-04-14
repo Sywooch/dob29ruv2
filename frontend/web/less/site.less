@@ -1,3 +1,5 @@
+@import "_variables.less";
+
 html,
 body {
   height: 100%;
@@ -101,9 +103,9 @@ a.desc:after {
   border: none;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
   .nav li > form > button.logout {
-    display:block;
+    display: block;
     text-align: left;
     width: 100%;
     padding: 10px 15px;
@@ -117,4 +119,91 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
   outline: none;
+}
+
+#social-maintop {
+  margin-top: 7px;
+  margin-right: 15px;
+}
+
+#social-maintop a {
+  color: #FAFAFA;
+  transition: color 200ms ease;
+}
+
+#social-maintop #vk .fa-vk {
+  color: #45668e;
+}
+
+#social-maintop #vk .fa-vk:hover {
+  color: #FFF;
+}
+
+#social-maintop #vk:hover {
+  color: #45668e;
+}
+
+#social-maintop #ok .fa-odnoklassniki {
+  color: #ff8a3c;
+}
+
+#social-maintop #ok .fa-odnoklassniki:hover {
+  color: #FFF;
+}
+
+#social-maintop #ok:hover {
+  color: #ff8a3c;
+}
+
+#social-maintop #fb .fa-facebook {
+  color: #3b5998;
+}
+
+#social-maintop #fb .fa-facebook:hover {
+  color: #FFF;
+}
+
+#social-maintop #fb:hover {
+  color: #3b5998;
+}
+
+#social-maintop #tw .fa-twitter {
+  color: #00aced;
+}
+
+#social-maintop #tw .fa-twitter:hover {
+  color: #FFF;
+}
+
+#social-maintop #tw:hover {
+  color: #00aced;
+}
+
+#social-maintop #gg .fa-google-plus {
+  color: #dd4b39;
+}
+
+#social-maintop #gg .fa-google-plus:hover {
+  color: #FFF;
+}
+
+#social-maintop #gg:hover {
+  color: #dd4b39;
+}
+
+#sub-btn-search {
+  width: 160px;
+}
+
+hr {
+  margin-top: 0;
+}
+
+.f-adv h5{
+  font-size: 16px;
+  margin: 0 0 5px;
+}
+
+.f-adv h5:first-letter{
+  text-transform: uppercase;
 }

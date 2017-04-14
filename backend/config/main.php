@@ -14,11 +14,7 @@ return [
     'modules' => [],
     'components' => [
         'request' => [
-            'baseUrl'=>'/backend',
             'csrfParam' => '_csrf-backend',
-        ],
-        'urlManager'=>[
-            'scriptUrl'=>'/backend/index.php',
         ],
         'user' => [
             'identityClass' => 'common\models\User',

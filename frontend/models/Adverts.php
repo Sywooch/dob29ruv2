@@ -8,7 +8,16 @@
 namespace frontend\models;
 
 
-class Adverts
+use yii\db\ActiveRecord;
+
+class Adverts extends ActiveRecord
 {
+    public $ads;
+
+    public static function getAds()
+    {
+        $ads = Adverts::find()->where( [ 'ad_active' => 1 ] )->limit( 10 )->all();
+        return $ads;
+    }
 
 }

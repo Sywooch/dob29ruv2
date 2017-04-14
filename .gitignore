@@ -34,5 +34,5 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 
-#
-.htaccess
+#Advert.sql
+
