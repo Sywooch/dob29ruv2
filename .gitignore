@@ -34,10 +34,10 @@ phpunit.phar
 # vagrant runtime
 /.vagrant
 
-/Advert.sql
+*.sql
 
 /yii.bat
 /init.bat
 /init
 
-
+*.bat

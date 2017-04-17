@@ -1,8 +1,10 @@
 <?php
 
+use yii\helpers\Html;
 use \yii\bootstrap\Button;
 use \frontend\components\sitesearch\SiteSearch;
 use \frontend\components\menu12btns\Menu12Btns;
+use \frontend\models\Adverts;
 
 /* @var $this yii\web\View */
 
@@ -50,18 +52,27 @@ $this->title = 'www.dob29.ru - Объявления';
 								 title="Вывод объявлений блоками"><i class="fa fa-th-large"></i></a>
 						</div>
 					</div>
-					<div class="col-sm-12"><hr></div>
+					<div class="col-sm-12">
+						<hr>
+					</div>
 				</div>
 
 
 				<?php
 				/** @var $ads frontend\models\Adverts */
-				foreach( $ads as $key => $v ){ ?>
+				foreach( $ads as $v ){
+
+					print '<pre>';
+						print_r($v);
+						print '</pre>';
+
+					?>
+
 					<div class="row f-adv">
 						<div class="col-sm-2">
 							<div class="thumbnail">
 								<a href="javascript:void(0);">
-									<img src="/frontend/web/files/i/1x1.png" alt="" width="149" height="112">
+									<?= Html::img( '/frontend/web/files/i/1x1.png', [ 'alt' => '' ] ) ?>
 								</a>
 							</div>
 						</div>
@@ -71,8 +82,33 @@ $this->title = 'www.dob29.ru - Объявления';
 																															 'param' => $v['ad_id'] ] ); ?>">
 								<h5><?= $v["ad_header"]; ?></h5>
 							</a>
+							<p>
+								<small>
+									<span><?php
+										echo Adverts::publicationDay( $v['ad_time_originated'], $v['ad_time'] ); ?>
+										&nbsp;&nbsp;&nbsp;<span><i
+													class="fa fa-map-marker"></i>г. <?= $v['citylist'][0]['city_list_name']; ?></span>,&nbsp;&nbsp;&nbsp;<i
+												class="fa fa-folder-open"></i>Недвижимость / Комнаты</span>
+								</small>
+							</p>
+
+							<p class="text-danger price-str"><?= $v['ad_price']; ?> руб.</p>
+							<div class="pull-right data-extra">
+								<?php $i = [ 'imgs'  => '<i class="fa fa-file-image-o"></i><span class="badge"></span>',
+														 'short' => 'Коротко:
+									<a href="javascript:void(0);" data-container="body" data-toggle="popover" animation="true" data-placement="top" data-content="2-комнатную для семьи от Соломбалы до Варавино Порядок и своевременную оплату гарант. Социальный образ жизни. Телефон: 8(911)560-26-44..." data-original-title="" title="" style="z-index: -222;">
+										<i class="fa fa-align-left"></i>
+									</a>',
+														 'type'  => 'Тип:&nbsp;<strong><span>Сниму</span></strong>',
+														 'views' => 'Просмотров:&nbsp;<span class="badge">1</span>' ]; ?>
+								<?= Html::ul( $i, [ 'class' => 'list-inline',
+																		'item'  => function( $item ){
+																			return Html::tag( 'li', $item );
+																		} ] ) ?>
+							</div>
+
 						</div>
-						<div class="clearfix">
+						<div class="col-sm-12">
 							<hr>
 						</div>
 					</div>
@@ -84,7 +120,7 @@ $this->title = 'www.dob29.ru - Объявления';
 			<div class="col-sm-3">
 
 				<?php echo Button::widget( [
-						'label'       => '<i class="fa fa-pencil-square-o"></i> Добавить объявление',
+						'label'       => '<i class="fa fa-pencil-square-o"></i> Подать объявление',
 						'encodeLabel' => false,
 						'options'     => [
 								'id'    => 'add-adv-btn',

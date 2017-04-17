@@ -9,6 +9,7 @@ namespace frontend\components\menu12btns;
 
 
 use yii\db\ActiveRecord;
+use frontend\models\Adverts;
 
 class Subcategory extends ActiveRecord
 {
@@ -24,6 +25,11 @@ class Subcategory extends ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['cat_id' => 'parent_id']);
+    }
+
+    public function getAdverts()
+    {
+        return $this->hasOne( Adverts::className(), [ 'ad_folder' => 'sub_id' ] );
     }
 
 }
