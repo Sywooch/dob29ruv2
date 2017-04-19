@@ -24,7 +24,7 @@ class Adverts extends ActiveRecord
         $ads = Adverts::find()
             ->asArray()
             ->joinWith( 'citylist' )
-            ->joinWith('subcategory')
+            ->leftJoin('subcategory','subcategory.sub_id = adverts.ad_folder')
             ->where( [ 'ad_active' => 1 ] )
             ->limit( 10 )
             ->orderBy( [ 'ad_id' => SORT_DESC ] )
