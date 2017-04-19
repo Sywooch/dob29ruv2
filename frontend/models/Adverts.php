@@ -20,11 +20,10 @@ class Adverts extends ActiveRecord
 
     public static function getAds()
     {
-
         $ads = Adverts::find()
             ->asArray()
             ->joinWith( 'citylist' )
-            ->leftJoin('subcategory','subcategory.sub_id = adverts.ad_folder')
+            ->joinWith('subcategory')
             ->where( [ 'ad_active' => 1 ] )
             ->limit( 10 )
             ->orderBy( [ 'ad_id' => SORT_DESC ] )
