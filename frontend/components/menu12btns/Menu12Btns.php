@@ -5,7 +5,7 @@
  * Time: 23:19
  */
 
-namespace app\components\menu12btns;
+namespace frontend\components\menu12btns;
 
 
 use yii;
@@ -31,8 +31,10 @@ class Menu12Btns extends Widget
 
     private function getCategory()
     {
-        $this->query = Category::find()->asArray();
-        $this->category = $this->query->joinWith( 'subcategory')->all();
+        $this->category = Category::find()
+            ->asArray()
+            ->joinWith( 'subcategory')
+            ->all();
 
         if ( !$this->category ){
             return NULL;

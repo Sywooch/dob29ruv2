@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components\menu12btns;
+namespace frontend\components\menu12btns;
 
 use yii;
 
@@ -29,6 +29,11 @@ class Category extends \yii\db\ActiveRecord
             [['cat_name'], 'required'],
             [['cat_name'], 'string', 'max' => 50],
         ];
+    }
+
+    public function getAdverts()
+    {
+        return $this->hasMany( Subcategory::className(), [ 'cat_id' => 'parent_id']);
     }
 
     /**

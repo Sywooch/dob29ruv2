@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
-use yii;
-use app\models\Adverts;
-use app\models\SearchAdverts;
+use Yii;
+use frontend\models\Adverts;
+use frontend\models\SearchAdverts;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use \yii\bootstrap\Button;
 use \frontend\components\sitesearch\SiteSearch;
-use app\components\menu12btns\Menu12Btns;
-use app\models\Adverts;
+use frontend\components\menu12btns\Menu12Btns;
+use frontend\models\Adverts;
 
 /* @var $this yii\web\View */
 
@@ -59,7 +59,7 @@ $this->title = 'www.dob29.ru - Объявления';
 
 
 				<?php
-				/** @var $ads app\models\Adverts */
+				/** @var $ads frontend\models\Adverts */
 				foreach( $ads as $v ){
 
 					print '<pre>';
@@ -88,23 +88,28 @@ $this->title = 'www.dob29.ru - Объявления';
 										echo Adverts::publicationDay( $v['ad_time_originated'], $v['ad_time'] ); ?>
 										&nbsp;&nbsp;&nbsp;<span><i
 													class="fa fa-map-marker"></i>г. <?= $v['citylist'][0]['city_list_name']; ?></span>,&nbsp;&nbsp;&nbsp;<i
-												class="fa fa-folder-open"></i>Недвижимость / Комнаты</span>
+												class="fa fa-folder-open"></i>Недвижимость / <?= $v['subcategory'][0]['sub_name'] ?></span>
 								</small>
 							</p>
 
 							<p class="text-danger price-str"><?= $v['ad_price']; ?> руб.</p>
 							<div class="pull-right data-extra">
-								<?php $i = [ 'imgs'  => '<i class="fa fa-file-image-o"></i><span class="badge"></span>',
-														 'short' => 'Коротко:
-									<a href="javascript:void(0);" data-container="body" data-toggle="popover" animation="true" data-placement="top" data-content="2-комнатную для семьи от Соломбалы до Варавино Порядок и своевременную оплату гарант. Социальный образ жизни. Телефон: 8(911)560-26-44..." data-original-title="" title="" style="z-index: -222;">
-										<i class="fa fa-align-left"></i>
-									</a>',
-														 'type'  => 'Тип:&nbsp;<strong><span>Сниму</span></strong>',
-														 'views' => 'Просмотров:&nbsp;<span class="badge">1</span>' ]; ?>
-								<?= Html::ul( $i, [ 'class' => 'list-inline',
-																		'item'  => function( $item ){
-																			return Html::tag( 'li', $item );
-																		} ] ) ?>
+
+								<ul class="list-inline">
+
+									<li title="Количество фотографий">
+										<i class="fa fa-file-image-o"></i>
+										<span class="badge"></span>
+									</li>
+									<li>Коротко:
+										<a href="javascript:void(0);" data-container="body" data-toggle="popover" animation="true" data-placement="top" data-content="Опыт разработки web-сайтов и мобильных приложений с геопозиционированием. Использование API Яндекс.Карт, Google Maps API, карты..." data-original-title="" title="" style="z-index: -222;">
+											<i class="fa fa-align-left"></i>
+										</a>
+									</li>
+									<li class="adv-type">Тип:&nbsp;<strong><span>Продам</span></strong></li>
+									<li>Просмотров:&nbsp;<span class="badge">1</span></li>
+								</ul>
+
 							</div>
 
 						</div>

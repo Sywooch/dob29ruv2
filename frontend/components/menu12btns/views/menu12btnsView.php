@@ -4,7 +4,7 @@
  * Date: 05.04.2017
  * Time: 23:30
  */
-use app\components\menu12btns\Menu12Btns;
+use frontend\components\menu12btns\Menu12Btns;
 use yii\helpers\Html;
 use yii\bootstrap\Tabs;
 

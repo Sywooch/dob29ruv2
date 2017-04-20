@@ -1,9 +1,9 @@
 <?php
 
-namespace app\components\menu12btns;
+namespace frontend\components\menu12btns;
 
 use yii;
-use app\models\Adverts;
+use frontend\models\Adverts;
 
 /**
  * This is the model class for table "subcategory".
