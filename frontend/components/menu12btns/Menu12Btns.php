@@ -5,10 +5,10 @@
  * Time: 23:19
  */
 
-namespace frontend\components\menu12btns;
+namespace app\components\menu12btns;
 
 
-use Yii;
+use yii;
 use yii\bootstrap\Widget;
 
 class Menu12Btns extends Widget

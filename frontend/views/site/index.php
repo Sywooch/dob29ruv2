@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use \yii\bootstrap\Button;
 use \frontend\components\sitesearch\SiteSearch;
-use \frontend\components\menu12btns\Menu12Btns;
-use \frontend\models\Adverts;
+use app\components\menu12btns\Menu12Btns;
+use app\models\Adverts;
 
 /* @var $this yii\web\View */
 
@@ -59,7 +59,7 @@ $this->title = 'www.dob29.ru - Объявления';
 
 
 				<?php
-				/** @var $ads frontend\models\Adverts */
+				/** @var $ads app\models\Adverts */
 				foreach( $ads as $v ){
 
 					print '<pre>';

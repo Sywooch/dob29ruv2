@@ -1,25 +1,50 @@
 <?php
+
+namespace app\components\menu12btns;
+
+use yii;
+
 /**
- * User: Администратор
- * Date: 11.04.2017
- * Time: 21:29
+ * This is the model class for table "category".
+ *
+ * @property integer $cat_id
+ * @property string $cat_name
  */
-
-namespace frontend\components\menu12btns;
-
-
-use yii\db\ActiveRecord;
-
-class Category extends ActiveRecord
+class Category extends \yii\db\ActiveRecord
 {
     /**
-     * @return string название таблицы, сопоставленной с этим ActiveRecord-классом.
+     * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{category}}';
+        return 'category';
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['cat_name'], 'required'],
+            [['cat_name'], 'string', 'max' => 50],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'cat_id' => 'Cat ID',
+            'cat_name' => 'Cat Name',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getSubcategory()
     {
         return $this->hasMany(Subcategory::className(), ['parent_id' => 'cat_id']);
