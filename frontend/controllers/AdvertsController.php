@@ -38,10 +38,10 @@ class AdvertsController extends Controller
         $searchModel = new SearchAdverts();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render( 'index', [
+            'searchModel'  => $searchModel,
+            'dataProvider' => $dataProvider
+        ] );
     }
 
     /**

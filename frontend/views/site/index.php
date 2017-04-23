@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use \yii\bootstrap\Button;
 use \frontend\components\sitesearch\SiteSearch;
 use frontend\components\menu12btns\Menu12Btns;
 use frontend\models\Adverts;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 
@@ -57,85 +57,45 @@ $this->title = 'www.dob29.ru - Объявления';
 					</div>
 				</div>
 
-
 				<?php
-				/** @var $ads frontend\models\Adverts */
-				foreach( $ads as $v ){
+//				print '<pre>';
+//				var_dump($dataProvider);
+//				print '</pre>';
+				?>
 
-					print '<pre>';
-						print_r($v);
-						print '</pre>';
+				<?=
+				/** @var $dataProvider frontend\controllers\ */
+				yii\widgets\ListView::widget([
+						'dataProvider' => $dataProvider,
+//						'options' => [
+//								'class' => 'list-wrapper',
+//								'id' => 'list-wrapper',
+//						],
+//						'layout' => "{pager}\n{items}\n{summary}",
+						'summary' => false,
+						'itemView' => function ($model, $key, $index, $widget) {
+							return $this->render('single_list_ad',['model' => $model]);
 
-					?>
+							// or just do some echo
+//							 return $model->ad_id . '_' . $model->ad_header;
+						},
+						'itemOptions' => [
+								'tag' => false,
+						],
+						'pager' => [
+								'firstPageLabel' => '<i class="fa fa-angle-double-left" aria-hidden="true"></i>',
+								'lastPageLabel' => '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+								'prevPageLabel' => '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+								'nextPageLabel' => '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+						],
+				])
+						?>
 
-					<div class="row f-adv">
-						<div class="col-sm-2">
-							<div class="thumbnail">
-								<a href="javascript:void(0);">
-									<?= Html::img( '/frontend/web/files/i/1x1.png', [ 'alt' => '' ] ) ?>
-								</a>
-							</div>
-						</div>
-
-						<div class="col-sm-10">
-							<a href="<?= Yii::$app->urlManager->createUrl( [ '',
-																															 'param' => $v['ad_id'] ] ); ?>">
-								<h5><?= $v["ad_header"]; ?></h5>
-							</a>
-							<p>
-								<small>
-									<span><?php
-										echo Adverts::publicationDay( $v['ad_time_originated'], $v['ad_time'] ); ?>
-										&nbsp;&nbsp;&nbsp;<span><i
-													class="fa fa-map-marker"></i>г. <?= $v['citylist'][0]['city_list_name']; ?></span>,&nbsp;&nbsp;&nbsp;<i
-												class="fa fa-folder-open"></i>Недвижимость / <?= $v['subcategory'][0]['sub_name'] ?></span>
-								</small>
-							</p>
-
-							<p class="text-danger price-str"><?= $v['ad_price']; ?> руб.</p>
-							<div class="pull-right data-extra">
-
-								<ul class="list-inline">
-
-									<li title="Количество фотографий">
-										<i class="fa fa-file-image-o"></i>
-										<span class="badge"></span>
-									</li>
-									<li>Коротко:
-										<a href="javascript:void(0);" data-container="body" data-toggle="popover" animation="true" data-placement="top" data-content="Опыт разработки web-сайтов и мобильных приложений с геопозиционированием. Использование API Яндекс.Карт, Google Maps API, карты..." data-original-title="" title="" style="z-index: -222;">
-											<i class="fa fa-align-left"></i>
-										</a>
-									</li>
-									<li class="adv-type">Тип:&nbsp;<strong><span>Продам</span></strong></li>
-									<li>Просмотров:&nbsp;<span class="badge">1</span></li>
-								</ul>
-
-							</div>
-
-						</div>
-						<div class="col-sm-12">
-							<hr>
-						</div>
-					</div>
-				<?php } ?>
-
-				<p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
 			</div>
 
 			<div class="col-sm-3">
 
-				<?php echo Button::widget( [
-						'label'       => '<i class="fa fa-pencil-square-o"></i> Подать объявление',
-						'encodeLabel' => false,
-						'options'     => [
-								'id'    => 'add-adv-btn',
-								'class' => 'btn-lg btn-danger btn-block',
-								'style' => 'border-bottom-width: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.3); text-transform: uppercase; font-size: 14px;'
-						]
-				] );
-				?>
-
-				<p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+				<button id="add-ads-main-red" class="btn btn-lg btn-danger btn-block"><i class="fa fa-pencil-square-o"></i> Подать объявление</button>
 
 			</div>
 		</div>
