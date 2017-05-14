@@ -26,10 +26,8 @@ class User extends ActiveRecord implements IdentityInterface, UserRbacInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-//    const ROLE_USER = 1;
-//    const ROLE_MODER = 5;
-//    const ROLE_ADMIN = 10;
-
+    const ROLE_USER = 10;
+    const ROLE_ADMIN = 20;
 
     /**
      * @inheritdoc
@@ -57,6 +55,7 @@ class User extends ActiveRecord implements IdentityInterface, UserRbacInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['role', 'in', 'range' => [self::STATUS_ACTIVE, self::ROLE_ADMIN]],
         ];
     }
 
@@ -84,7 +83,7 @@ class User extends ActiveRecord implements IdentityInterface, UserRbacInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE] );
     }
 
     /**
@@ -199,10 +198,28 @@ class User extends ActiveRecord implements IdentityInterface, UserRbacInterface
         return $this->username;
     }
 
+    /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
     public function afterSave( $insert, $changedAttributes )
     {
         parent::afterSave( $insert, $changedAttributes );
         $userRole = Yii::$app->authManager->getRole('user');
         Yii::$app->authManager->assign($userRole, $this->getId());
+    }
+
+    /**
+     * @param $username
+     * @return bool
+     */
+    public static function isUserAdmin($username)
+    {
+        if (static::findOne(['username' => $username, 'role' => self::ROLE_ADMIN]))
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

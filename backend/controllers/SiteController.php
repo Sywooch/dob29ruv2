@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use developeruz\db_rbac\behaviors\AccessBehavior;
 
 /**
  * Site controller
@@ -28,6 +29,7 @@ class SiteController extends Controller
                     ],
                     [
                         'actions' => ['logout', 'index', 'show-users', 'role'],
+//                        'actions' => [],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -39,6 +41,11 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+//            'as AccessBehavior' => [
+//                'class' => AccessBehavior::className(),
+////                'redirect_url' => '/forbidden',
+//                'login_url' => Yii::$app->user->loginUrl,
+//            ]
         ];
     }
 
@@ -71,17 +78,20 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if ( !Yii::$app->user->isGuest ) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ( $model->load( Yii::$app->request->post() ) && $model->loginAdmin() ) {
+            // TODO: сделать редирект на отдельную страницу, разрешённую всем, где описать что клиентам сюда нельзя и вывести ссылку на "попробовать ещё раз", которая отлогинит юзера и редиректнет на логин. http://yiiframework.ru/forum/viewtopic.php?t=38279
+
             return $this->goBack();
-        } else {
-            return $this->render('login', [
+        }
+        else {
+            return $this->render( 'login', [
                 'model' => $model,
-            ]);
+            ] );
         }
     }
 
