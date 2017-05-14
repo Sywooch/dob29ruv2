@@ -26,6 +26,9 @@ class User extends ActiveRecord implements IdentityInterface, UserRbacInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+//    const ROLE_USER = 1;
+//    const ROLE_MODER = 5;
+//    const ROLE_ADMIN = 10;
 
 
     /**
