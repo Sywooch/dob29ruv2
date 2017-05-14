@@ -15,7 +15,8 @@ return [
         'permit' => [
             'class' => 'developeruz\db_rbac\Yii2DbRbac',
             'params' => [
-                'userClass' => 'app\models\User'
+                'userClass' => 'common\models\User',
+                'accessRoles' => ['admin']
             ],
 //            'layout' => '//admin'
         ],

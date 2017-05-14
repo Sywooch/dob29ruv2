@@ -195,4 +195,11 @@ class User extends ActiveRecord implements IdentityInterface, UserRbacInterface
     {
         return $this->username;
     }
+
+    public function afterSave( $insert, $changedAttributes )
+    {
+        parent::afterSave( $insert, $changedAttributes );
+        $userRole = Yii::$app->authManager->getRole('user');
+        Yii::$app->authManager->assign($userRole, $this->getId());
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\UserSearch;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -26,7 +27,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'show-users'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -94,5 +95,16 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionShowUsers()
+    {
+        $users = new UserSearch();
+        $dataProvider = $users->search(Yii::$app->request->queryParams);
+
+        return $this->render( '/users/index', [
+            'searchModel'  => $users,
+            'dataProvider' => $dataProvider
+        ] );
     }
 }
