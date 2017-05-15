@@ -35,3 +35,9 @@ $form->field( $model, 'searchWord', [
 ] )->label( false ); ?>
 
 <?php ActiveForm::end(); ?>
+
+<p class="help-block">
+    Пример: nokia&nbsp;&nbsp;
+    <b><a id="ext-search-link" href="javascript:void();"><i class="fa fa-search-plus"></i>&nbsp;&nbsp;Расширенный
+            поиск</a></b>
+</p>

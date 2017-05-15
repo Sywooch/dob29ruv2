@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use frontend\models\Adverts;
 use common\utils\Utils;
+use common\models\DataHelper;
 
 ?>
 <?php
@@ -29,17 +30,22 @@ use common\utils\Utils;
 	</div>
 
 	<div class="col-sm-10">
-		<a href="<?= Yii::$app->urlManager->createUrl( [ '',
-																										 'param' => $model['ad_id'] ] ); ?>">
-			<h5><?= Html::encode($model['ad_header']); ?></h5>
+		<a href="<?= Yii::$app->urlManager->createUrl( [
+				'',
+				'param' => $model['ad_id']
+		] ); ?>">
+			<h5><?= Html::encode( $model['ad_header'] ); ?></h5>
 		</a>
 		<p>
 			<small>
-										<span><?php
-											echo Utils::publicationDay( $model['ad_time_originated'], $model['ad_time'] ); ?>
-											&nbsp;&nbsp;&nbsp;<span><i
-														class="fa fa-map-marker"></i>г. <?= $model['city_list_name']; ?></span>,&nbsp;&nbsp;&nbsp;<i
-													class="fa fa-folder-open"></i><?= $model['cat_name']; ?> / <?= $model['sub_name']?></span>
+				<span><?php echo Utils::publicationDay( $model['ad_time_originated'], $model['ad_time'] ); ?>
+					&nbsp;&nbsp;&nbsp;<span>
+						<i class="fa fa-map-marker"></i>
+						г. <?= DataHelper::getCity( $model['ad_city']) ?></span>,
+					&nbsp;&nbsp;&nbsp;
+					<i class="fa fa-folder-open"></i>
+					<?= $model['cat_name']; ?> / <?= $model['sub_name'] ?>
+				</span>
 			</small>
 		</p>
 
@@ -60,7 +66,9 @@ use common\utils\Utils;
 						<i class="fa fa-align-left"></i>
 					</a>
 				</li>
-				<li class="adv-type">Тип:&nbsp;<strong><span>Продам</span></strong></li>
+				<li class="adv-type">
+					Тип:&nbsp;<strong><span><?= DataHelper::getAdvertType( $model['ad_type'] ) ?></span></strong>
+				</li>
 				<li>Просмотров:&nbsp;<span class="badge">1</span></li>
 			</ul>
 

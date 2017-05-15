@@ -1,24 +1,14 @@
 <?php
 
-use yii\helpers\Html;
 use \frontend\components\sitesearch\SiteSearch;
 use frontend\components\menu12btns\Menu12Btns;
-use frontend\models\Adverts;
-use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 
-$this->title = 'www.dob29.ru - Объявления';
+$this->title = 'www.dob29.ru - Category';
 ?>
 <div class="site-index">
-
-	<!--<div class="jumbotron">
-		<h1>Congratulations!</h1>
-
-		<p class="lead">You have successfully created your Yii-powered application.</p>
-
-		<p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-	</div>-->
 
 	<div class="body-content">
 
@@ -34,7 +24,7 @@ $this->title = 'www.dob29.ru - Объявления';
 				<br>
 				<div class="row">
 					<div class="col-sm-5">
-						<h4>Последние добавленные объявления</h4>
+						<h4><?= ArrayHelper::getValue( $dataProvider, 'allModels.0.cat_name' ) ?></h4>
 					</div>
 					<div class="col-sm-7 text-right">
 
@@ -50,46 +40,33 @@ $this->title = 'www.dob29.ru - Объявления';
 						<hr>
 					</div>
 				</div>
-
-				<?php
-//				print '<pre>';
-//				var_dump($dataProvider);
-//				print '</pre>';
-				?>
-
 				<?=
 				/** @var $dataProvider frontend\controllers\ */
-				yii\widgets\ListView::widget([
+				yii\widgets\ListView::widget( [
 						'dataProvider' => $dataProvider,
-//						'options' => [
-//								'class' => 'list-wrapper',
-//								'id' => 'list-wrapper',
-//						],
-//						'layout' => "{pager}\n{items}\n{summary}",
-						'summary' => false,
-						'itemView' => function ($model, $key, $index, $widget) {
-							return $this->render('single_list_ad',['model' => $model]);
-
-							// or just do some echo
-//							 return $model->ad_id . '_' . $model->ad_header;
+						'summary'      => false,
+						'itemView'     => function ( $model, $key, $index, $widget ){
+							return $this->render( 'single_list_ad', [ 'model' => $model ] );
 						},
-						'itemOptions' => [
+						'itemOptions'  => [
 								'tag' => false,
 						],
-						'pager' => [
+						'pager'        => [
 								'firstPageLabel' => '<i class="fa fa-angle-double-left" aria-hidden="true"></i>',
-								'lastPageLabel' => '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
-								'prevPageLabel' => '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-								'nextPageLabel' => '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+								'lastPageLabel'  => '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+								'prevPageLabel'  => '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+								'nextPageLabel'  => '<i class="fa fa-angle-right" aria-hidden="true"></i>',
 						],
-				])
-						?>
+				] )
+				?>
 
 			</div>
 
 			<div class="col-sm-3">
 
-				<button id="add-ads-main-red" class="btn btn-lg btn-danger btn-block"><i class="fa fa-pencil-square-o"></i> Подать объявление</button>
+				<button id="add-ads-main-red" class="btn btn-lg btn-danger btn-block"><i class="fa fa-pencil-square-o"></i>
+					Подать объявление
+				</button>
 
 			</div>
 		</div>

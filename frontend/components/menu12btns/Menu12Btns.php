@@ -7,7 +7,6 @@
 
 namespace frontend\components\menu12btns;
 
-
 use yii;
 use yii\bootstrap\Widget;
 
@@ -33,11 +32,11 @@ class Menu12Btns extends Widget
     {
         $this->category = Category::find()
             ->asArray()
-            ->joinWith( 'subcategory')
+            ->joinWith( 'subcategory' )
             ->all();
 
-        if ( !$this->category ){
-            return NULL;
+        if ( !$this->category ) {
+            return null;
         }
         return $this->category;
     }

@@ -81,66 +81,88 @@ class Adverts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [ [ 'ad_folder',
-                'ad_type',
-                'ad_city',
-                'ad_price',
-                'ad_currency',
-                'ad_period',
-                'ad_time',
-                'ad_approved',
-                'ad_active',
-                'ad_placed',
-                'ad_selected',
-                'ad_selected_start',
-                'ad_selected_dur',
-                'ad_special',
-                'ad_special_start',
-                'ad_special_dur',
-                'ad_image1',
-                'ad_image2',
-                'ad_image3',
-                'ad_image4',
-                'ad_image5',
-                'ad_image6',
-                'ad_userid',
-                'ad_rate',
-                'ad_viewday',
-                'ad_viewweek',
-                'ad_viewmonth',
-                'ad_ipadress',
-                'ad_ipproxyadress',
-                'ad_sendviaemail',
-                'ad_time_originated',
-                'ad_sold',
-                'ad_responses',
-                'ad_up',
-                'ad_img',
-                'exist_adv_id' ],
-              'integer' ],
-            [ [ 'ad_header',
-                'ad_comment',
-                'ad_customvalues',
-                'ad_imgdescription',
-                'ad_advhash',
-                'ad_address' ],
-              'string' ],
-            [ [ 'ad_up',
-                'ad_img' ],
-              'required' ],
-            [ [ 'ad_sid',
-                'ad_pass' ],
-              'string',
-              'max' => 32 ],
-            [ [ 'ad_username',
-                'ad_useremail',
-                'ad_url',
-                'ad_email_real' ],
-              'string',
-              'max' => 100 ],
-            [ [ 'ad_userphone' ],
-              'string',
-              'max' => 50 ],
+            [
+                [
+                    'ad_folder',
+                    'ad_type',
+                    'ad_city',
+                    'ad_price',
+                    'ad_currency',
+                    'ad_period',
+                    'ad_time',
+                    'ad_approved',
+                    'ad_active',
+                    'ad_placed',
+                    'ad_selected',
+                    'ad_selected_start',
+                    'ad_selected_dur',
+                    'ad_special',
+                    'ad_special_start',
+                    'ad_special_dur',
+                    'ad_image1',
+                    'ad_image2',
+                    'ad_image3',
+                    'ad_image4',
+                    'ad_image5',
+                    'ad_image6',
+                    'ad_userid',
+                    'ad_rate',
+                    'ad_viewday',
+                    'ad_viewweek',
+                    'ad_viewmonth',
+                    'ad_ipadress',
+                    'ad_ipproxyadress',
+                    'ad_sendviaemail',
+                    'ad_time_originated',
+                    'ad_sold',
+                    'ad_responses',
+                    'ad_up',
+                    'ad_img',
+                    'exist_adv_id'
+                ],
+                'integer'
+            ],
+            [
+                [
+                    'ad_header',
+                    'ad_comment',
+                    'ad_customvalues',
+                    'ad_imgdescription',
+                    'ad_advhash',
+                    'ad_address'
+                ],
+                'string'
+            ],
+            [
+                [
+                    'ad_up',
+                    'ad_img'
+                ],
+                'required'
+            ],
+            [
+                [
+                    'ad_sid',
+                    'ad_pass'
+                ],
+                'string',
+                'max' => 32
+            ],
+            [
+                [
+                    'ad_username',
+                    'ad_useremail',
+                    'ad_url',
+                    'ad_email_real'
+                ],
+                'string',
+                'max' => 100
+            ],
+            [
+                [ 'ad_userphone' ],
+                'string',
+                'max' => 50
+            ],
         ];
     }
 
@@ -211,23 +233,23 @@ class Adverts extends \yii\db\ActiveRecord
         $query = ( new \yii\db\Query() )
             ->select( [ '*' ] )
             ->from( 'adverts' )
-            ->leftJoin( 'citylist', 'city_list_id = ad_city' )
+//            ->leftJoin( 'citylist', 'city_list_id = ad_city' )
             ->leftJoin( 'subcategory', 'sub_id =ad_folder' )
             ->innerJoin( 'category', 'parent_id = cat_id' )
             ->where( [ 'ad_active' => 1 ] )
             ->orderBy( [ 'ad_id' => SORT_DESC ] )
             ->all();
 
-        $arrayProvider = new ArrayDataProvider([
-            'allModels' => $query,
+        $arrayProvider = new ArrayDataProvider( [
+            'allModels'  => $query,
             'pagination' => [
                 'pagesize' => 30,
             ],
-        ]);
+        ] );
 
         $this->load( $params );
 
-        if ( !$this->validate() ){
+        if ( !$this->validate() ) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $arrayProvider;
@@ -320,6 +342,61 @@ class Adverts extends \yii\db\ActiveRecord
         return $arrayProvider;
     }
 
+    public function showCategoryPage( $params )
+    {
+        if ( $params['t'] === 'sub' ) {
+            $query = ( new \yii\db\Query() )
+                ->select( [ '*' ] )
+                ->from( 'adverts' )
+                ->leftJoin( 'citylist', 'city_list_id = ad_city' )
+                ->leftJoin( 'subcategory', 'sub_id =ad_folder' )
+                ->innerJoin( 'category', 'parent_id = cat_id' )
+                ->where( [ 'ad_active' => 1, 'ad_folder' => $params['id'] ] )
+                ->orderBy( [ 'ad_id' => SORT_DESC ] )
+                ->all();
+        }
+        else {
+            if ( $params['t'] === 'cut' ) {
+//            $query = ( new \yii\db\Query() )
+//                ->select( [ '*' ] )
+//                ->from( 'adverts' )
+//                ->leftJoin( 'citylist', 'city_list_id = ad_city' )
+//                ->leftJoin( 'subcategory', 'sub_id =ad_folder' )
+//                ->innerJoin( 'category', 'parent_id = cat_id' )
+//                ->where( [ 'ad_active' => 1, 'ad_folder' => $params['id'] ] )
+//                ->orderBy( [ 'ad_id' => SORT_DESC ] )
+//                ->all();
+            }
+        }
+        //print_r ($params); exit;
+
+
+        $arrayProvider = new ArrayDataProvider( [
+            'allModels'  => $query,
+            'pagination' => [
+                'pagesize' => 30,
+            ],
+        ] );
+
+        $this->load( $params );
+
+        if ( !$this->validate() ) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $arrayProvider;
+        }
+
+        return $arrayProvider;
+    }
+    public function getCategoryName( $arg ){
+        $query = ( new \yii\db\Query() )
+            ->select('cat_name')
+            ->from('category')
+            ->leftJoin('subcategory', 'sub_id = $arg')
+            ->innerJoin('category', 'parent_id = cat_id');
+
+        return $query;
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -341,4 +418,6 @@ class Adverts extends \yii\db\ActiveRecord
     {
         return $this->hasMany( Subcategory::className(), [ 'sub_id' => 'ad_folder' ] );
     }
+
+
 }

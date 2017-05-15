@@ -13,7 +13,6 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\Adverts;
-use frontend\models\SearchAdverts;
 
 /**
  * Site controller
@@ -79,7 +78,30 @@ class SiteController extends Controller
         $dataProvider = $advertsModel->getAds(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'advertsModel' => $advertsModel,
+//            'advertsModel' => $advertsModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionShowCategoryPage()
+    {
+        $advertsModel = new Adverts();
+        $dataProvider = $advertsModel->showCategoryPage(Yii::$app->request->queryParams);
+
+//        $newQuery = clone $dataProvider->query;
+//        $model = $newQuery->limit(1)->one();
+//        var_dump($model);
+
+        
+
+//        print_r(Yii::$app->request->queryParams);
+        
+        $c = new Adverts();
+        $c = $c->getCategoryName( Yii::$app->request->queryParams['id']);
+//        var_dump($c);
+
+        return $this->render('category', [
+//            'advertsModel' => $advertsModel,
             'dataProvider' => $dataProvider,
         ]);
     }
