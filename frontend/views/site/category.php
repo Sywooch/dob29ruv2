@@ -6,7 +6,7 @@ use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 
-$this->title = 'www.dob29.ru - Category';
+$this->title = 'www.dob29.ru - Category'; 
 ?>
 <div class="site-index">
 
@@ -20,7 +20,7 @@ $this->title = 'www.dob29.ru - Category';
 
 				<?= SiteSearch::widget(); ?>
 
-				<?= Menu12Btns::widget(); ?>
+				<?= Menu12Btns::widget(['id' => 1]); ?>
 				<br>
 				<div class="row">
 					<div class="col-sm-5">
